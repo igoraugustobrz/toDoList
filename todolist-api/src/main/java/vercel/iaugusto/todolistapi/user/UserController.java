@@ -1,5 +1,6 @@
 package vercel.iaugusto.todolistapi.user;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,10 @@ public class UserController {
             System.out.println("Username já existente.");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuário já existente.");
         }
+
+        // Criptografa a senha do usuário utilizando a biblioteca BCrypt
+        var passwordHash = BCrypt.withDefaults().hashToString(12, userModel.getPassword().toCharArray());
+        userModel.setPassword(passwordHash);
 
         var userCreated = this.userRepository.save(userModel);
 

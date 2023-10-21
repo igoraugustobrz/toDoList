@@ -28,6 +28,7 @@ Projeto em andamento.
 - Lombok;
 - Spring Data JPA;
 - MySQL Driver;
+- [BCrypt](https://github.com/patrickfav/bcrypt/tree/main)
 - Maven.
 
 ## Instalando

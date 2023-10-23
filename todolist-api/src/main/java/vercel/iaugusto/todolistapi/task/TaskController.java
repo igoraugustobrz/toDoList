@@ -48,4 +48,13 @@ public class TaskController {
         var listTasks = this.taskRepository.findByIdUser((UUID) idUser);
         return listTasks;
     }
+
+    // Atualizar as tarefas
+    @PutMapping("/{id}")
+    public TaskModel udate(@RequestBody TaskModel taskModel, @PathVariable UUID id, HttpServletRequest request) {
+        var idUser =  request.getAttribute("idUser");
+        taskModel.setIdUser((UUID) idUser);
+        taskModel.setId(id);
+        return this.taskRepository.save(taskModel);
+    }
 }
